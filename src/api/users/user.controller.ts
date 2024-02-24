@@ -2,12 +2,14 @@ import { Request, Response } from 'express';
 import errorHandler from '../../utils/errorHandler';
 import {
   getAllUser,
-  getUserById,
+  getById,
   getUserByEmail,
-  createUsers,
+  create,
+  destroy,
+  put
 } from './user.service';
 
-export async function getAllUsersHandler(req: Request, res: Response) {
+export async function getUsers(req: Request, res: Response) {
   try {
     const { email } = req.query;
 
@@ -25,12 +27,12 @@ export async function getAllUsersHandler(req: Request, res: Response) {
   }
 }
 
-export async function getUserByIdHandler(req: Request, res: Response) {
+export async function getUserById(req: Request, res: Response) {
   try {
 
     const { id } = req.params;
 
-    const user = await getUserById(id);
+    const user = await getById(id);
 
     if (!user) {
       return res.status(404).json({
@@ -45,11 +47,11 @@ export async function getUserByIdHandler(req: Request, res: Response) {
   }
 }
 
-export async function userCreateHandler(req: Request, res: Response) {
+export async function createUser(req: Request, res: Response) {
   try {
     const data = req.body;
 
-    const user = await createUsers(data);
+    const user = await create(data);
     return res.status(201).json(user)
   } catch (exception: unknown) {
     const message = errorHandler(exception);
@@ -57,3 +59,29 @@ export async function userCreateHandler(req: Request, res: Response) {
   }
 }
 
+export async function deleteUser(req: Request, res: Response) {
+  try {
+    const { id } = req.params;
+    await destroy(id);
+
+    return res.end();
+
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
+  }
+}
+
+export async function updateUser(req: Request, res: Response) {
+  try {
+    const { id } = req.params;
+    const data = req.body;
+
+    const user = await put(id, data);
+
+    return res.json(user);
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
+  }
+}

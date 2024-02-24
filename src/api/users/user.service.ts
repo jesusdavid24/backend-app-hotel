@@ -8,7 +8,7 @@ export async function getAllUser() {
   return users
 }
 
-export async function createUsers(data: Users) {
+export async function create(data: Users) {
 
   const { email, ...userData } = data;
 
@@ -28,7 +28,7 @@ export async function createUsers(data: Users) {
   return user;
 }
 
-export async function getUserById(id: string) {
+export async function getById(id: string) {
   const user = await prisma.users.findUnique({
     where: {
       id,
@@ -48,4 +48,26 @@ export async function getUserByEmail(email: string) {
   return user;
 }
 
+export async function destroy(id: string) {
+  const user = await prisma.users.update({
+    where: {
+      id: id,
+    },
+    data: {
+      isDeleted: false
+    }
+  });
 
+  return user;
+}
+
+export async function put(id: string, data: Users) {
+  const user = await prisma.users.update({
+    where: {
+      id: id,
+    },
+    data
+  })
+
+  return user;
+}

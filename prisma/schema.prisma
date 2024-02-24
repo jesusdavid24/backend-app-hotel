@@ -20,6 +20,7 @@ model Users {
   password  String
   phone     String
   isActive  Boolean  @default(false)
+  isDeleted Boolean  @default(false)
   role      Roles
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
