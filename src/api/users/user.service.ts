@@ -1,18 +1,18 @@
 import { PrismaClient } from '@prisma/client';
-import { Users } from './user.types';
+import { User } from './user.types';
 
 const prisma = new PrismaClient();
 
 export async function getAllUser() {
-  const users = await prisma.users.findMany();
+  const users = await prisma.user.findMany();
   return users
 }
 
-export async function create(data: Users) {
+export async function create(data: User) {
 
   const { email, ...userData } = data;
 
-  const user = await prisma.users.upsert({
+  const user = await prisma.user.upsert({
     where: {
       email: email
     },
@@ -29,7 +29,7 @@ export async function create(data: Users) {
 }
 
 export async function getById(id: string) {
-  const user = await prisma.users.findUnique({
+  const user = await prisma.user.findUnique({
     where: {
       id,
     }
@@ -39,7 +39,7 @@ export async function getById(id: string) {
 }
 
 export async function getUserByEmail(email: string) {
-  const user = await prisma.users.findUnique({
+  const user = await prisma.user.findUnique({
     where: {
       email,
     }
@@ -49,7 +49,7 @@ export async function getUserByEmail(email: string) {
 }
 
 export async function destroy(id: string) {
-  const user = await prisma.users.update({
+  const user = await prisma.user.update({
     where: {
       id: id,
     },
@@ -61,8 +61,8 @@ export async function destroy(id: string) {
   return user;
 }
 
-export async function put(id: string, data: Users) {
-  const user = await prisma.users.update({
+export async function put(id: string, data: User) {
+  const user = await prisma.user.update({
     where: {
       id: id,
     },

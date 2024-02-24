@@ -13,31 +13,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Users {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+model User {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
   name      String
-  email     String   @unique
+  email     String    @unique
   password  String
   phone     String
-  isActive  Boolean  @default(false)
-  isDeleted Boolean  @default(false)
-  role      Roles
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  isActive  Boolean   @default(false)
+  isDeleted Boolean   @default(false)
+  role      Role
+  booking   Booking[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
-enum Roles {
+enum Role {
   ADMIN
   CLIENT
 }
 
-model Bookings {
-  id             String        @id @default(auto()) @map("_id") @db.ObjectId
-  dateCheckIn    DateTime      @default(now())
-  dateCheckOut   DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
-  usersId        String        @db.ObjectId
-  bookingsStatus BookingStatus
+model Booking {
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
+  checkInDate   DateTime
+  checkOutDate  DateTime
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  User          User          @relation(fields: [userId], references: [id])
+  userId        String        @db.ObjectId
+  bookingStatus BookingStatus
 }
 
 enum BookingStatus {

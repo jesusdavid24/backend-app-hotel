@@ -5,11 +5,11 @@ import {
   createUser,
   deleteUser,
   updateUser
-} from "./user.controller";
+} from './user.controller';
 
 const router = Router();
 
-router.get('/', getUsers);
+router.get('/',);
 router.get('/:id', getUserById);
 router.post('/', createUser);
 router.delete('/:id', deleteUser);
