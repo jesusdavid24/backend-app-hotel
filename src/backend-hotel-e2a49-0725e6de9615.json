@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "backend-hotel-e2a49",
+  "private_key_id": "0725e6de961505c5acb2ac8962ff34200ebde428",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCagi2QQXs+7JTG\ndtONoa+9DsPhBIUqf39jB11l2Pe92X1SggF70RW/ogoovvId2P26sWG0gzs6ZkLS\nXsuMGIpRaqSdRx1Rhue9cSgNhpolxvJx0UaVWg0VLM6f645fZECMOaD46XCZoXTg\n5Ais+wn/CjbCCp4hf4TODdfP5o/ExocEiGSyuyaMnfpHBrB7OGT5vaEkCMnT5h4B\nGyo4vNp02pr2R5bWDvLCjiC53CUxCLAXOONBPikAtLPqRRl6BuzilFyBVq46Cu8V\nzNZBIeCCFQveFobCcL7hQklq8FyECITSh8B+mHXqNc4W9vM5ZNQF95wWeeP/qerk\nMzvydHZlAgMBAAECggEABjeIt846tEx2rAmp93/y/0txzEMPTKd2q7hnJKr3RPdU\nWJaMkrvWATD28a7FNTg+9V0fzlCdeHsW4zoXPJrcLex5lS6AWoBwIKpF701kNHLt\n3HCMQ4QtFJYJ9ltXDjWNd1b2SC20byoU9tuWEcfEHjP+Ag7FUBm+cUATV/UyAbvf\nP5K08lkWeyeo6n3m41tBjgPlxVh1wijO+88NhoEpnDybZ+zQBc0nK9W87WaF9NWJ\n3trbn8yomvowjH8tUcAT+njRLHJ8XprIZaUNHUFBXJlUmeMd8O+y1mVG2lahzTP2\nWreafr/L9bXn17VKvOap8zASFPZOkebneJOqw+x4/QKBgQDH7RU5n9vmTUz+s+od\nY7w9r1xE8Jj2Cldyfn7jHhWbvsYMJ55s2xxbYDnjUK3lOKUZQtgfXDRqYQUBID9p\noJEd+Mv+VEMKqinfRkTIcKL42ocLB/ETVNrF28dyiJYW46pypFHA3cnOSpyvARA2\nIjCd4UHVTkyThVW3bUKZE3yYdwKBgQDF2A+cXFu5YS7/cXFJ3kp1Bno7wKp0GneN\nEHDZvOeAM5Vq7t7B2dOHRR3l7aaxCKaBh+fBysyLf3nEldHdMWBIZ2yQiPKNa0Pj\nmQarcVJJCjfG283mwQM1r/D2LmqRXWe5k9uYsGim5QX90xjivSv5Yr4AipctUInZ\nnnAqiA77AwKBgQCIB1Dsv08QmMHtfx6o1oZq9hjysz1wEsNDHLxa7cpICPqZpI9P\ng5n8tjFM8EURdIQo9uk0FTl4tACCrp1W0jBK01CBAHYJGJSa3SXJt5G7fnxpzgKC\nY7bi7tH6pOJyOn9rt1AEySMZIH0ROcj8/DBWC8EOUFMcAJm8zzOEEdUxqwKBgQCE\nTXJTC+hC1dyJ8iDiVwbPr186aiMStUhRSzdMRGlDcDtxYQAR/krYYL4Xro8UQEao\nxGuVSrryZnLVpaLMGmLayF7vYMVjEOI7Z2/wYj22nmCiWQceUuCEnH21A2E8iIv+\nrAPj3cR+JxWUogA4UG0Bvqh00Dk8kmk84Bj+ODJcZQKBgFBqpVuYeUd5ecgvHToJ\nzIxDCp7NkivKHBmvjRH/vJNdg1wwEUkf0XzRR34rarGS7luzCVJiFcAZiEdQQDyS\nImkH8LCAiSdlWPUpXYdU7XSGYzu5eXcueMNRgIQAwnn3lbaoLM4OYjWsxqefNTSc\n0MqPJJx+6QPqfilJ10N8B+EU\n-----END PRIVATE KEY-----\n",
+  "client_email": "hotel1@backend-hotel-e2a49.iam.gserviceaccount.com",
+  "client_id": "115828821293188826885",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/hotel1%40backend-hotel-e2a49.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
