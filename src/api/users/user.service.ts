@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 export async function getAllUser() {
   const users = await prisma.user.findMany();
-  return users
+  return users;
 }
 
 export async function create(data: User) {
@@ -54,7 +54,7 @@ export async function destroy(id: string) {
       id: id,
     },
     data: {
-      isDeleted: false
+      isDeleted: true
     }
   });
 
