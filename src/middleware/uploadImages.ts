@@ -1,32 +1,34 @@
 import { Request, Response } from 'express';
 import { Storage } from '@google-cloud/storage';
-import { createReadStream } from 'fs';
 import path from 'path';
+import errorHandler from '../utils/errorHandler';
 
-const gc = new Storage({
-  keyFilename: path.join(__dirname, "../backend-hotel-e2a49-338b4700bb30.json"),
-  projectId: "backend-hotel-e2a49"
+
+let projectId = "backend-hotel-e2a49";
+let keyFilename = path.join(__dirname, "../backend-hotel-e2a49-338b4700bb30.json")
+
+const storage = new Storage({
+  projectId,
+  keyFilename,
 });
 
-const hotelBucket = gc.bucket('backend-hotel-e2a49.appspot.com');
+const bucket = storage.bucket('backend-hotel-e2a49.appspot.com')
 
-export async function uploadFilesToGPC(req: Request, res: Response) {
+export async function uploadFiles(req: Request, res: Response) {
   try {
-    const { filePath, fileName } = req.body
-    const file = hotelBucket.file(fileName);
-    const stream = createReadStream(filePath);
+    if (req.file) {
+      const blob = bucket.file(req.file.originalname);
+      const blobStream = blob.createWriteStream();
 
-    await new Promise((res) => {
-      stream
-        .pipe(file.createWriteStream({
-          resumable: false,
-          gzip: true
-        }))
-        .on('finish', res)
-    });
+      blobStream.on("finish", () => {
+        res.status(200).send("succes")
+      });
 
-    return res.send('upload')
-  } catch (error) {
-    console.log(error);
+      blobStream.end(req.file.buffer);
+    } else throw "error upload image";
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
   }
 }
+

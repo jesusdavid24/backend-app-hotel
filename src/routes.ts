@@ -5,7 +5,6 @@ import roomRouter from './api/rooms';
 import amenityRouter from './api/amenity';
 import ruleRouter from './api/rule';
 import healthCheckRouter from './api/healtCheck';
-import listRouter from './middleware/index';
 
 
 const routes = (app: Application) => {
@@ -15,7 +14,6 @@ const routes = (app: Application) => {
   app.use('/api/rule', ruleRouter);
   app.use('/api/amenity', amenityRouter);
   app.use('/api/healthCheck', healthCheckRouter);
-  app.use('/api/list', listRouter);
 }
 
 export default routes;
