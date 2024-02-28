@@ -4,6 +4,7 @@ import bookingRouter from './api/booking';
 import roomRouter from './api/rooms';
 import amenityRouter from './api/amenity';
 import ruleRouter from './api/rule';
+import imagesRouter from './api/images'
 import healthCheckRouter from './api/healtCheck';
 
 
@@ -13,6 +14,7 @@ const routes = (app: Application) => {
   app.use('/api/room', roomRouter);
   app.use('/api/rule', ruleRouter);
   app.use('/api/amenity', amenityRouter);
+  app.use('/api/upload-images', imagesRouter);
   app.use('/api/healthCheck', healthCheckRouter);
 }
 
