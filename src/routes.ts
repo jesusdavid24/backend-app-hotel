@@ -5,6 +5,7 @@ import roomRouter from './api/rooms';
 import amenityRouter from './api/amenity';
 import ruleRouter from './api/rule';
 import imagesRouter from './api/images'
+import loginRouter from './auth/local'
 import healthCheckRouter from './api/healtCheck';
 
 
@@ -16,6 +17,7 @@ const routes = (app: Application) => {
   app.use('/api/amenity', amenityRouter);
   app.use('/api/upload-images', imagesRouter);
   app.use('/api/healthCheck', healthCheckRouter);
+  app.use('/login', loginRouter);
 }
 
 export default routes;
