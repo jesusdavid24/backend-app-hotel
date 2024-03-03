@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import passport from 'passport';
 import {
   getBookings,
   getBookingById,
@@ -9,9 +10,17 @@ import {
 
 const router = Router();
 
-router.get('/:id', getBookingById)
+router.get(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  getBookingById
+)
 router.get('/', getBookings);
-router.post('/', createBooking);
+router.post(
+  '/',
+  passport.authenticate('jwt', { session: false }),
+  createBooking
+);
 router.delete('/:id', deleteBooking);
 router.put('/:id', updateBooking)
 
