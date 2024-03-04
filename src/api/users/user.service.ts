@@ -75,3 +75,4 @@ export async function put(id: string, data: User) {
 
   return user;
 }
+

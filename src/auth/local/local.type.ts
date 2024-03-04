@@ -4,7 +4,8 @@ import { User } from '../../api/users/user.types';
 
 export type PayloadType = {
   id: string;
-  role: string;
+  name: string;
+  roleId: string;
   iat?: number;
   exp?: number;
 }

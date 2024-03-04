@@ -21,15 +21,17 @@ model User {
   phone     String
   isActive  Boolean   @default(false)
   isDeleted Boolean   @default(false)
-  role      Role
   booking   Booking[]
+  Role      Role      @relation(fields: [roleId], references: [id])
+  roleId    String    @db.ObjectId
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 }
 
-enum Role {
-  ADMIN
-  CLIENT
+model Role {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String @unique
+  User User[]
 }
 
 model Booking {

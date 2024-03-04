@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import passport from 'passport';
+import { checkRole } from '../../middleware/verifyRole'
+
 import {
   getBookings,
   getBookingById,
@@ -7,6 +9,7 @@ import {
   deleteBooking,
   updateBooking
 } from './booking.controller';
+
 
 const router = Router();
 
@@ -19,6 +22,7 @@ router.get('/', getBookings);
 router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
+  checkRole(['ADMIN', 'CLIENT']),
   createBooking
 );
 router.delete('/:id', deleteBooking);

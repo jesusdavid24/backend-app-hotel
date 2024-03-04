@@ -2,25 +2,28 @@ import { Request, Response } from 'express';
 
 import errorHandler from '../../utils/errorHandler/errorHandler';
 import { signToken } from './local.service';
-import { User } from '../../api/users/user.types'
+import { User } from '../../api/users/user.types';
+import { getRoleById } from '../../api/role/role.service';
 
 export async function login(req: Request, res: Response) {
 
   try {
     const user = req.user as User;
+    const role = await getRoleById(user.roleId)
+    const roleName = role?.name;
+
 
     const payload = {
       id: user.id,
-      role: user.role,
+      name: user.name,
+      roleId: roleName as string,
     }
-
-    console.log(payload);
 
     const token = signToken(payload);
 
     const userLogged = {
       name: user.name,
-      role: user.role
+      roleId: roleName as string,
     }
 
     res.json({ token, userLogged });
