@@ -26,6 +26,15 @@ export async function getById(id: string) {
   return booking;
 }
 
+export async function getBookingsByUserId(id: string) {
+  const booking = await prisma.booking.findMany({
+    where: {
+      userId: id,
+    },
+  });
+  return booking;
+}
+
 export async function destroy(id: string) {
   const booking = await prisma.booking.update({
     where: {
@@ -35,6 +44,8 @@ export async function destroy(id: string) {
       bookingStatus: 'CANCELLED'
     }
   });
+
+  return booking;
 }
 
 export async function put(id: string, data: Booking) {

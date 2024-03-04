@@ -10,7 +10,7 @@ export function verifyToken(token: string) {
 }
 
 export function signToken(payload: PayloadType) {
-  const token = jwt.sign(payload, SECRET, { expiresIn: `${1000 * 60 * 60 * 24}` })
+  const token = jwt.sign(payload, SECRET, { expiresIn: `${1000 * 60 * 60}` })
 
   return token;
 }

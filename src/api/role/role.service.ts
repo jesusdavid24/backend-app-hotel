@@ -26,5 +26,5 @@ export async function getRoleById(id: string) {
     }
   });
 
-  return role;
+  return role!;
 }

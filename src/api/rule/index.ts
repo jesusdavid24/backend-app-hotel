@@ -1,4 +1,7 @@
 import { Router } from 'express';
+import passport from 'passport';
+import { checkRole } from '../../middleware/verifyRole';
+
 import {
   createRule,
   deleteRule,
@@ -8,9 +11,13 @@ import {
 
 const router = Router();
 
-router.get('/', getAllRules);
-router.post('/', createRule);
-router.delete('/:id', deleteRule);
-router.put('/:id', updateRule)
+router.all('*', [
+  passport.authenticate('jwt', { session: false }),
+  checkRole('ADMIN', 'CLIENT'),
+])
+  .get('/', getAllRules)
+  .post('/', createRule)
+  .delete('/:id', deleteRule)
+  .put('/:id', updateRule)
 
 export default router;

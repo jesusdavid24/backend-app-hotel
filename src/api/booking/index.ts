@@ -1,10 +1,11 @@
 import { Router } from 'express';
 import passport from 'passport';
-import { checkRole } from '../../middleware/verifyRole'
+import { checkRole } from '../../middleware/verifyRole';
 
 import {
   getBookings,
   getBookingById,
+  getBookingsByUser,
   createBooking,
   deleteBooking,
   updateBooking
@@ -13,19 +14,15 @@ import {
 
 const router = Router();
 
-router.get(
-  '/:id',
+router.all('*', [
   passport.authenticate('jwt', { session: false }),
-  getBookingById
-)
-router.get('/', getBookings);
-router.post(
-  '/',
-  passport.authenticate('jwt', { session: false }),
-  checkRole(['ADMIN', 'CLIENT']),
-  createBooking
-);
-router.delete('/:id', deleteBooking);
-router.put('/:id', updateBooking)
+  checkRole('ADMIN', 'CLIENT'),
+])
+  .get('/:id', getBookingById)
+  .get('/', getBookings)
+  .get('/user/:id', getBookingsByUser)
+  .post('/', createBooking)
+  .delete('/:id', deleteBooking)
+  .put('/:id', updateBooking);
 
 export default router;

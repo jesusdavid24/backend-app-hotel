@@ -6,7 +6,7 @@ import {
 
 import { User } from '../api/users/user.types';
 
-export function checkRole(role: string[]) {
+export function checkRole(...role: string[]) {
   return (req: Request, res: Response, next: NextFunction) => {
     const user = req.user as User;
     console.log(user.roleId);

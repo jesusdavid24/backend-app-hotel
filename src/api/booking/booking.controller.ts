@@ -4,6 +4,7 @@ import errorHandler from '../../utils/errorHandler/errorHandler';
 import {
   getAllBooking,
   getById,
+  getBookingsByUserId,
   create,
   destroy,
   put
@@ -14,6 +15,19 @@ export async function getBookings(req: Request, res: Response) {
     const bookings = await getAllBooking();
     return res.json(bookings);
   } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
+  }
+}
+
+export async function getBookingsByUser(req: Request, res: Response) {
+  try {
+    const { id } = req.params;
+
+    const bookingByUser = await getBookingsByUserId(id);
+
+    return res.json(bookingByUser);
+  } catch (exception) {
     const message = errorHandler(exception);
     return res.status(400).send({ message });
   }

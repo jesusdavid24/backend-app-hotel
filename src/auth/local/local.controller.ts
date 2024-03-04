@@ -10,20 +10,18 @@ export async function login(req: Request, res: Response) {
   try {
     const user = req.user as User;
     const role = await getRoleById(user.roleId)
-    const roleName = role?.name;
-
 
     const payload = {
       id: user.id,
       name: user.name,
-      roleId: roleName as string,
+      roleId: role.name,
     }
 
     const token = signToken(payload);
 
     const userLogged = {
       name: user.name,
-      roleId: roleName as string,
+      roleId: role.name,
     }
 
     res.json({ token, userLogged });

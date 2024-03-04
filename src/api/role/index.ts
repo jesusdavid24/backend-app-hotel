@@ -1,4 +1,7 @@
 import { Router } from 'express';
+import passport from 'passport';
+import { checkRole } from '../../middleware/verifyRole';
+
 import {
   getRole,
   getRolesById,
@@ -7,8 +10,12 @@ import {
 
 const router = Router();
 
-router.get('/', getRole);
-router.get('/:id', getRolesById);
-router.post('/', createRole);
+router.all('*', [
+  passport.authenticate('jwt', { session: false }),
+  checkRole('ADMIN'),
+])
+  .get('/', getRole)
+  .get('/:id', getRolesById)
+  .post('/', createRole)
 
 export default router;

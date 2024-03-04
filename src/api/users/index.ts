@@ -1,4 +1,7 @@
 import { Router } from 'express';
+import passport from 'passport';
+import { checkRole } from '../../middleware/verifyRole';
+
 import {
   getUsers,
   getUserById,
@@ -9,10 +12,39 @@ import {
 
 const router = Router();
 
-router.get('/', getUsers);
-router.get('/:id', getUserById);
-router.post('/', createUser);
-router.delete('/:id', deleteUser);
-router.put('/:id', updateUser)
+router.get(
+  '/',
+  passport.authenticate('jwt', { session: false }),
+  checkRole('ADMIN'),
+  getUsers
+);
+
+router.get(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  checkRole('ADMIN'),
+  getUserById
+);
+
+router.post(
+  '/',
+  passport.authenticate('jwt', { session: false }),
+  checkRole('ADMIN', 'CLIENT'),
+  createUser
+);
+
+router.delete(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  checkRole('ADMIN', 'CLIENT'),
+  deleteUser
+);
+
+router.put(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  checkRole('ADMIN', 'CLIENT'),
+  updateUser
+);
 
 export default router;
