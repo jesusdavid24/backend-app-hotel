@@ -14,3 +14,4 @@ export function signToken(payload: PayloadType) {
 
   return token;
 }
+

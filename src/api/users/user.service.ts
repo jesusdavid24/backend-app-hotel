@@ -65,7 +65,7 @@ export async function destroy(id: string) {
   return user;
 }
 
-export async function put(id: string, data: User) {
+export async function put(id: string, data: Partial<User>) {
   const user = await prisma.user.update({
     where: {
       id: id,

@@ -26,12 +26,7 @@ router.get(
   getUserById
 );
 
-router.post(
-  '/',
-  passport.authenticate('jwt', { session: false }),
-  checkRole('ADMIN', 'CLIENT'),
-  createUser
-);
+router.post('/', createUser);
 
 router.delete(
   '/:id',
