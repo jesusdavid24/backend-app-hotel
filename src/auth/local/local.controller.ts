@@ -22,6 +22,7 @@ export async function login(req: Request, res: Response) {
     const userLogged = {
       name: user.name,
       roleId: role.name,
+      recoveryToken: user.recoveryToken,
     }
 
     res.json({ token, userLogged });

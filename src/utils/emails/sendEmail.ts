@@ -23,7 +23,7 @@ export const welcomeEmail = async (user: User) => {
   }
 
   const payload = { id: user.id };
-  const token = jwt.sign(payload, SECRET, { expiresIn: `${1000 * 60 * 15}` });
+  const token = jwt.sign(payload, SECRET, { expiresIn: `${1000 * 60 * 60}` });
   const link = `http://frontend.com/recovery?token=${token}`;
 
   await put(user.id, { recoveryToken: token });

@@ -21,7 +21,6 @@ export async function getRoom(req: Request, res: Response) {
 export async function createRoom(req: Request, res: Response) {
   try {
     const data = req.body;
-    console.log(data);
 
     const room = await create(data)
 
