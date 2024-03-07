@@ -41,7 +41,7 @@ export async function destroy(id: string) {
       id: id,
     },
     data: {
-      bookingStatus: 'CANCELLED'
+      status: 'CANCELLED'
     }
   });
 

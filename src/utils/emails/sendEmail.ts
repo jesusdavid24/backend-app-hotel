@@ -35,7 +35,7 @@ export const welcomeEmail = async (user: User) => {
     subject: 'Recuperar clave de acceso',
     html: `
       <div style='${styles.container}'>
-        <h1 style='${styles.title}'>Hola ${user.name}</h1>
+        <h1 style='${styles.title}'>Hola ${user.firstName} ${user.lastName}</h1>
         <p>Ingresa al siguiente link para recuperar tu clave de acceso ${link}</p>
       </div>
     `,

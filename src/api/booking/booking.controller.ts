@@ -50,6 +50,10 @@ export async function getBookingById(req: Request, res: Response) {
   }
 }
 
+// export async function createBooking(req: Request, res: Response) {
+
+// }
+
 export async function createBooking(req: Request, res: Response) {
   try {
     const data = req.body;

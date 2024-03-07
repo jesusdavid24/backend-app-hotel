@@ -13,14 +13,14 @@ export async function login(req: Request, res: Response) {
 
     const payload = {
       id: user.id,
-      name: user.name,
+      name: `${user.firstName} ${user.lastName}`,
       roleId: role.name,
     }
 
     const token = signToken(payload);
 
     const userLogged = {
-      name: user.name,
+      name: `${user.firstName} ${user.lastName}`,
       roleId: role.name,
       recoveryToken: user.recoveryToken,
     }
