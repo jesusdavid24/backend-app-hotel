@@ -7,6 +7,7 @@ import {
   getBookingById,
   getBookingsByUser,
   createBooking,
+  createBookingWithoutLogin,
   deleteBooking,
   updateBooking
 } from './booking.controller';
@@ -14,15 +15,48 @@ import {
 
 const router = Router();
 
-router.all('*', [
+
+router.get(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  checkRole('ADMIN',),
+  getBookingById
+);
+
+router.get(
+  '/', passport.authenticate('jwt', { session: false }),
+  checkRole('ADMIN',),
+  getBookings
+);
+
+router.get(
+  '/user/:id',
+  passport.authenticate('jwt', { session: false }),
+  checkRole('ADMIN',),
+  getBookingsByUser
+);
+
+router.post(
+  '/',
   passport.authenticate('jwt', { session: false }),
   checkRole('ADMIN', 'CLIENT'),
-])
-  .get('/:id', getBookingById)
-  .get('/', getBookings)
-  .get('/user/:id', getBookingsByUser)
-  .post('/', createBooking)
-  .delete('/:id', deleteBooking)
-  .put('/:id', updateBooking);
+  createBooking
+);
+
+router.delete(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  checkRole('ADMIN', 'CLIENT'),
+  deleteBooking
+);
+
+router.put(
+  '/:id', passport.authenticate('jwt', { session: false }),
+  checkRole('ADMIN', 'CLIENT'),
+  updateBooking
+);
+
+
+router.post('/create', createBookingWithoutLogin);
 
 export default router;

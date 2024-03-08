@@ -1,5 +1,9 @@
 import { Request, Response } from 'express';
 import errorHandler from '../../utils/errorHandler/errorHandler';
+import { getUserByEmail } from '../users/user.service';
+import { createUser } from '../potencialUser/potencialUser.service';
+import { PotencialUser } from '../potencialUser/potencialUser.type';
+import { Booking } from './booking.types'
 
 import {
   getAllBooking,
@@ -50,9 +54,47 @@ export async function getBookingById(req: Request, res: Response) {
   }
 }
 
-// export async function createBooking(req: Request, res: Response) {
+export async function createBookingWithoutLogin(req: Request, res: Response) {
+  try {
+    let user = null;
 
-// }
+    const {
+      identificationNumber,
+      firstName,
+      lastName,
+      email,
+      checkInDate,
+      checkOutDate
+    } = req.body;
+
+    const newUser = {
+      identificationNumber,
+      firstName,
+      lastName,
+      email
+    };
+
+    user = await getUserByEmail(email);
+
+    if (!user) {
+      user = await createUser(newUser as PotencialUser);
+    }
+
+    const newBooking = {
+      checkInDate,
+      checkOutDate,
+      potencialUserId: user.id
+    };
+
+    const booking = await create(newBooking as Booking);
+
+    return res.status(201).json(booking);
+
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
+  }
+}
 
 export async function createBooking(req: Request, res: Response) {
   try {

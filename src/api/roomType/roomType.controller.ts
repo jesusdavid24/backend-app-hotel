@@ -2,39 +2,40 @@ import { Request, Response } from 'express';
 import errorHandler from '../../utils/errorHandler/errorHandler';
 
 import {
-  getAllUser,
+  getAllRoomType,
   destroy,
-  createUser,
+  create,
   put
-} from './potencialUser.service';
+} from './roomType.service';
 
-export async function getUsers(req: Request, res: Response) {
+export async function getRoomType(req: Request, res: Response) {
   try {
-    const user = await getAllUser();
-
-    return res.json(user);
+    const roomType = await getAllRoomType();
+    return res.json(roomType);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
     return res.status(400).send({ message });
   }
 }
 
-export async function createPotencialUser(req: Request, res: Response) {
+export async function createRoomType(req: Request, res: Response) {
   try {
     const data = req.body;
 
-    const user = await createUser(data);
+    const roomType = await create(data);
 
-    return res.status(201).json(user);
+    return res.status(201).json(roomType);
+
   } catch (exception: unknown) {
     const message = errorHandler(exception);
     return res.status(400).send({ message });
   }
 }
 
-export async function deletePotencialUser(req: Request, res: Response) {
+export async function deleteRoomType(req: Request, res: Response) {
   try {
     const { id } = req.params;
+
     await destroy(id);
 
     return res.end();
@@ -45,14 +46,14 @@ export async function deletePotencialUser(req: Request, res: Response) {
   }
 }
 
-export async function updatePotencialUser(req: Request, res: Response) {
+export async function updateRoomType(req: Request, res: Response) {
   try {
     const { id } = req.params;
     const data = req.body;
 
-    const user = await put(id, data);
+    const roomType = await put(id, data);
 
-    return res.json(user);
+    return res.json(roomType);
 
   } catch (exception: unknown) {
     const message = errorHandler(exception);

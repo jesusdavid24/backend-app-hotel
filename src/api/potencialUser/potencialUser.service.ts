@@ -8,7 +8,7 @@ export async function getAllUser() {
   return user;
 }
 
-export async function create(data: PotencialUser) {
+export async function createUser(data: PotencialUser) {
   const user = await prisma.potencialUser.create({
     data,
   });

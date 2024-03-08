@@ -3,11 +3,11 @@ import passport from 'passport';
 import { checkRole } from '../../middleware/verifyRole';
 
 import {
-  getRoom,
-  createRoom,
-  deleteRoom,
-  updateRoom
-} from './rooms.controller';
+  getRoomType,
+  createRoomType,
+  deleteRoomType,
+  updateRoomType
+} from './roomType.controller';
 
 const router = Router();
 
@@ -15,9 +15,9 @@ router.all('*', [
   passport.authenticate('jwt', { session: false }),
   checkRole('ADMIN'),
 ])
-  .get('/', getRoom)
-  .post('/', createRoom)
-  .delete('/:id', deleteRoom)
-  .put('/:id', updateRoom)
+  .get('/', getRoomType)
+  .post('/', createRoomType)
+  .put('/:id', updateRoomType)
+  .delete('/:id', deleteRoomType)
 
 export default router;
