@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { getById } from '../users/user.service';
 import { Booking } from './booking.types';
 
 const prisma = new PrismaClient();
@@ -12,16 +13,23 @@ export async function create(data: Booking) {
 
   const { status, ...input } = data;
 
+  if (!input.userId) {
+    throw Error('User not found');
+  }
+
+  const user = await getById(input.userId)
+
   const booking = await prisma.booking.create({
     data: {
       ...input,
+      createBy: `${user.firstName} ${user.lastName}`
     }
   });
 
   return booking;
 }
 
-export async function getById(id: string) {
+export async function getByIdBooking(id: string) {
   const booking = await prisma.booking.findUnique({
     where: {
       id,

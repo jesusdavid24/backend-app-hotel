@@ -8,7 +8,7 @@ import { Booking } from './booking.types';
 
 import {
   getAllBooking,
-  getById,
+  getByIdBooking,
   getBookingsByUserId,
   create,
   destroy,
@@ -42,7 +42,7 @@ export async function getBookingById(req: Request, res: Response) {
   try {
     const { id } = req.params;
 
-    const booking = await getById(id);
+    const booking = await getByIdBooking(id);
 
     if (!booking) {
       return res.end()

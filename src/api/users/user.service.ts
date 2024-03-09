@@ -39,7 +39,8 @@ export async function getById(id: string) {
     }
   });
 
-  return user;
+
+  return user!;
 }
 
 export async function getUserByEmail(email: string) {
