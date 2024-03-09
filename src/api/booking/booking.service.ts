@@ -9,8 +9,13 @@ export async function getAllBooking() {
 }
 
 export async function create(data: Booking) {
+
+  const { status, ...input } = data;
+
   const booking = await prisma.booking.create({
-    data
+    data: {
+      ...input,
+    }
   });
 
   return booking;
