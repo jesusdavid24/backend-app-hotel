@@ -4,6 +4,7 @@ import { checkRole } from '../../middleware/verifyRole';
 
 import {
   getRoom,
+  getById,
   createRoom,
   deleteRoom,
   updateRoom
@@ -11,13 +12,35 @@ import {
 
 const router = Router();
 
-router.all('*', [
+router.get(
+  '/',
   passport.authenticate('jwt', { session: false }),
-  checkRole('ADMIN'),
-])
-  .get('/', getRoom)
-  .post('/', createRoom)
-  .delete('/:id', deleteRoom)
-  .put('/:id', updateRoom)
+  checkRole('ADMIN',),
+  getRoom
+);
+
+router.get('/:id', getById);
+
+router.post(
+  '/', passport.authenticate('jwt', { session: false }),
+  checkRole('ADMIN',),
+  createRoom
+);
+
+router.delete(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  checkRole('ADMIN',),
+  deleteRoom
+);
+
+router.put(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  checkRole('ADMIN',),
+  updateRoom
+);
+
+
 
 export default router;

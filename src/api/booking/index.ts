@@ -36,6 +36,8 @@ router.get(
   getBookingsByUser
 );
 
+router.post('/create', createBookingWithoutLogin);
+
 router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
@@ -57,6 +59,6 @@ router.put(
 );
 
 
-router.post('/create', createBookingWithoutLogin);
+
 
 export default router;

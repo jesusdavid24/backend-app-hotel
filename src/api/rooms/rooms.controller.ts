@@ -3,6 +3,7 @@ import errorHandler from '../../utils/errorHandler/errorHandler';
 
 import {
   getAllRoom,
+  getRoomById,
   create,
   destroy,
   put
@@ -12,6 +13,19 @@ export async function getRoom(req: Request, res: Response) {
   try {
     const rooms = await getAllRoom();
     return res.status(200).json(rooms);
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
+  }
+}
+
+export async function getById(req: Request, res: Response) {
+  try {
+    const { id } = req.params;
+
+    const room = await getRoomById(id);
+
+    return res.json(room);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
     return res.status(400).send({ message });

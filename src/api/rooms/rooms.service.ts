@@ -8,6 +8,16 @@ export async function getAllRoom() {
   return room;
 }
 
+export async function getRoomById(id: string) {
+  const room = prisma.room.findUnique({
+    where: {
+      id: id
+    }
+  });
+
+  return room;
+}
+
 export async function create(data: Room) {
   const room = prisma.room.create({
     data,

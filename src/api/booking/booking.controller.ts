@@ -3,7 +3,8 @@ import errorHandler from '../../utils/errorHandler/errorHandler';
 import { getUserByEmail } from '../users/user.service';
 import { createUser } from '../potencialUser/potencialUser.service';
 import { PotencialUser } from '../potencialUser/potencialUser.type';
-import { Booking } from './booking.types'
+import { getRoomById } from '../rooms/rooms.service';
+import { Booking } from './booking.types';
 
 import {
   getAllBooking,
@@ -63,6 +64,7 @@ export async function createBookingWithoutLogin(req: Request, res: Response) {
       firstName,
       lastName,
       email,
+      roomId,
       checkInDate,
       checkOutDate
     } = req.body;
@@ -80,10 +82,17 @@ export async function createBookingWithoutLogin(req: Request, res: Response) {
       user = await createUser(newUser as PotencialUser);
     }
 
+    const room = await getRoomById(roomId);
+
+    if (!room) {
+      return res.send('Room not found');
+    }
+
     const newBooking = {
       checkInDate,
       checkOutDate,
-      potencialUserId: user.id
+      potencialUserId: user.id,
+      roomId: room.id
     };
 
     const booking = await create(newBooking as Booking);
