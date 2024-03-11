@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { Role } from './role.type';
+import { type Role } from './role.type';
 
 const prisma = new PrismaClient();
 
@@ -25,6 +25,6 @@ export async function getRoleById(id: string) {
       name: true
     }
   });
-
+  
   return role!;
 }

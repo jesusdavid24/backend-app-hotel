@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { type Request, type Response } from 'express';
 import { Storage } from '@google-cloud/storage';
 import path from 'path';
 import errorHandler from '../../utils/errorHandler';

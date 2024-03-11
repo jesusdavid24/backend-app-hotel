@@ -1,1 +1,1 @@
-export { Rule } from '@prisma/client';
+export type { Rule } from '@prisma/client';

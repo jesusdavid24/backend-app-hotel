@@ -1,10 +1,8 @@
-import { Request, Response } from 'express';
+import { type Request, type Response } from 'express';
 import errorHandler from '../../utils/errorHandler';
-import {
-  getAllRole,
-  getRoleById,
-  create
-} from './role.service';
+import { type Role } from './role.type';
+
+import { getAllRole, getRoleById, create } from './role.service';
 
 export async function getRole(req: Request, res: Response) {
   try {
@@ -20,7 +18,7 @@ export async function getRolesById(req: Request, res: Response) {
   try {
     const { id } = req.params;
 
-    const role = await getRoleById(id)
+    const role = await getRoleById(id);
 
     return res.json(role);
   } catch (exception: unknown) {
@@ -31,7 +29,7 @@ export async function getRolesById(req: Request, res: Response) {
 
 export async function createRole(req: Request, res: Response) {
   try {
-    const data = req.body;
+    const data: Role = req.body;
 
     const role = await create(data);
 

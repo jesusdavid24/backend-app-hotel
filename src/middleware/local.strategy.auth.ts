@@ -10,13 +10,13 @@ const LocalStrategy = new Strategy({
       const user = await getUserByEmail(email);
 
       if (!user) {
-        return done(null, false, { message: 'unauthorized' });
+        done(null, false, { message: 'unauthorized' }); return;
       }
 
       const isMatch = await comparePassword(password, user.password)
 
       if (!isMatch) {
-        return done(null, false, { message: 'unauthorized' });
+        done(null, false, { message: 'unauthorized' }); return;
       }
 
       done(null, user);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { Router } from 'express';
 import passport from 'passport';
 import { checkRole } from '../../middleware/verifyRole';
@@ -12,27 +13,26 @@ import {
   updateBooking
 } from './booking.controller';
 
-
 const router = Router();
-
 
 router.get(
   '/:id',
   passport.authenticate('jwt', { session: false }),
-  checkRole('ADMIN',),
+  checkRole('ADMIN'),
   getBookingById
 );
 
 router.get(
-  '/', passport.authenticate('jwt', { session: false }),
-  checkRole('ADMIN',),
+  '/',
+  passport.authenticate('jwt', { session: false }),
+  checkRole('ADMIN'),
   getBookings
 );
 
 router.get(
   '/user/:id',
   passport.authenticate('jwt', { session: false }),
-  checkRole('ADMIN',),
+  checkRole('ADMIN'),
   getBookingsByUser
 );
 
@@ -53,12 +53,10 @@ router.delete(
 );
 
 router.put(
-  '/:id', passport.authenticate('jwt', { session: false }),
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
   checkRole('ADMIN', 'CLIENT'),
   updateBooking
 );
-
-
-
 
 export default router;

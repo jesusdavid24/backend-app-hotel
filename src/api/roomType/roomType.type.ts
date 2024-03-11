@@ -1,1 +1,1 @@
-export { RoomType } from '@prisma/client';
+export type { RoomType } from '@prisma/client';

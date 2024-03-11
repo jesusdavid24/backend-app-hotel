@@ -1,17 +1,13 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import errorHandler from '../../utils/errorHandler';
+import type { Amenity } from './amenity.types';
 
-import {
-  put,
-  create,
-  destroy,
-  getAmenity,
-} from './amenity.service';
+import { put, create, destroy, getAmenity } from './amenity.service';
 
 export async function getAmenities(req: Request, res: Response) {
   try {
     const amenities = await getAmenity();
-    return res.status(200).send(amenities)
+    return res.status(200).send(amenities);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
     return res.status(400).send({ message });
@@ -20,7 +16,7 @@ export async function getAmenities(req: Request, res: Response) {
 
 export async function createAmenity(req: Request, res: Response) {
   try {
-    const data = req.body;
+    const data: Amenity = req.body;
 
     const amenity = await create(data);
 
@@ -46,11 +42,11 @@ export async function deleteAmenity(req: Request, res: Response) {
 export async function updateAmenity(req: Request, res: Response) {
   try {
     const { id } = req.params;
-    const data = req.body;
+    const data: Amenity = req.body;
 
-    const amenity = await put(id, data)
+    const amenity = await put(id, data);
 
-    return res.json(amenity)
+    return res.json(amenity);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
     return res.status(400).send({ message });

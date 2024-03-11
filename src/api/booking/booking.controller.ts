@@ -1,10 +1,10 @@
-import { Request, Response } from 'express';
-import errorHandler from '../../utils/errorHandler';
+import type { Request, Response } from 'express';
+import type { PotencialUser } from '../potencialUser/potencialUser.type';
+import type { Booking } from './booking.types';
 import { getUserByEmail } from '../users/user.service';
 import { createUser } from '../potencialUser/potencialUser.service';
-import { PotencialUser } from '../potencialUser/potencialUser.type';
 import { getRoomById } from '../rooms/rooms.service';
-import { Booking } from './booking.types';
+import errorHandler from '../../utils/errorHandler';
 
 import {
   getAllBooking,
@@ -76,13 +76,13 @@ export async function createBookingWithoutLogin(req: Request, res: Response) {
       email
     };
 
-    user = await getUserByEmail(email);
+    user = await getUserByEmail(email as string);
 
     if (!user) {
       user = await createUser(newUser as PotencialUser);
     }
 
-    const room = await getRoomById(roomId);
+    const room = await getRoomById(roomId as string);
 
     if (!room) {
       return res.send('Room not found');
@@ -107,7 +107,7 @@ export async function createBookingWithoutLogin(req: Request, res: Response) {
 
 export async function createBooking(req: Request, res: Response) {
   try {
-    const data = req.body;
+    const data: Booking = req.body;
 
     const booking = await create(data);
     return res.status(201).json(booking)
@@ -132,7 +132,7 @@ export async function deleteBooking(req: Request, res: Response) {
 export async function updateBooking(req: Request, res: Response) {
   try {
     const { id } = req.params;
-    const data = req.body;
+    const data: Booking = req.body;
 
     const booking = await put(id, data);
 

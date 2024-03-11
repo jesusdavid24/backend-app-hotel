@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { PotencialUser } from './potencialUser.type';
+import { type PotencialUser } from './potencialUser.type';
 
 const prisma = new PrismaClient();
 
@@ -19,7 +19,7 @@ export async function createUser(data: PotencialUser) {
 export async function destroy(id: string) {
   const user = await prisma.potencialUser.update({
     where: {
-      id: id
+      id
     },
     data: {
       isDeleted: true
@@ -32,7 +32,7 @@ export async function destroy(id: string) {
 export async function put(id: string, data: Partial<PotencialUser>) {
   const user = await prisma.potencialUser.update({
     where: {
-      id: id
+      id
     },
     data,
   });

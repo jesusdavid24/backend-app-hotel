@@ -1,11 +1,11 @@
-import { Request, Response } from 'express';
+import { type Request, type Response } from 'express';
 
 import errorHandler from '../utils/errorHandler';
-import { signToken } from './auth.service';
-import { User } from '../api/users/user.types';
+import { signToken , changePassword } from './auth.service';
+import { type User } from '../api/users/user.types';
 import { sendNodeMailer } from '../config/nodemailer';
 import { welcomeEmail } from '../utils/sendEmail';
-import { changePassword } from './auth.service';
+
 import { getUserByEmail } from '../api/users/user.service'
 import { getRoleById } from '../api/role/role.service';
 
@@ -61,7 +61,7 @@ export async function changesPasswords(req: Request, res: Response) {
   try {
     const { token, newPassword } = req.body;
 
-    const answer = await changePassword(token, newPassword)
+    const answer = await changePassword(token, newPassword);
 
     return res.send(answer)
 

@@ -1,1 +1,1 @@
-export { PotencialUser } from '@prisma/client';
+export type { PotencialUser } from '@prisma/client';

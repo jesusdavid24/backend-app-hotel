@@ -1,1 +1,1 @@
-export { Amenity } from '@prisma/client';
+export type { Amenity } from '@prisma/client';

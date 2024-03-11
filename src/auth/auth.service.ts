@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken';
-import { PayloadType } from './auth.type';
+import { type PayloadType } from './auth.type';
 import { hashPassword } from '../utils/bcrypt';
 import { getById, put } from '../api/users/user.service';
 
 
-const SECRET = process.env.JWT_SECRET as string
+const SECRET = process.env.JWT_SECRET!
 
 export function verifyToken(token: string) {
   const decoded = jwt.verify(token, SECRET) as PayloadType
@@ -35,4 +35,5 @@ export async function changePassword(token: string, newPassword: string) {
   const hashedNewPassword = await hashPassword(newPassword);
 
   await put(user.id, { recoveryToken: null, password: hashedNewPassword });
+
 }

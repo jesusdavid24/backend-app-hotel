@@ -1,12 +1,12 @@
 import jwt from 'jsonwebtoken';
 import { put } from '../api/users/user.service'
-import { User } from '../api/users/user.types';
+import { type User } from '../api/users/user.types';
 
-const SECRET = process.env.JWT_SECRET as string
+const SECRET = process.env.JWT_SECRET!
 
 export const welcomeEmail = async (user: User) => {
 
-  type Styles = {
+  interface Styles {
     container: string,
     title: string
   }

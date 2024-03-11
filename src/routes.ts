@@ -1,4 +1,4 @@
-import { Application } from 'express';
+import { type Application } from 'express';
 import userRouter from './api/users';
 import bookingRouter from './api/booking';
 import roomRouter from './api/rooms';

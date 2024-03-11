@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { hashPassword } from '../../utils/bcrypt';
-import { User } from './user.types';
+import { type User } from './user.types';
 
 const prisma = new PrismaClient();
 
@@ -56,7 +56,7 @@ export async function getUserByEmail(email: string) {
 export async function destroy(id: string) {
   const user = await prisma.user.update({
     where: {
-      id: id,
+      id,
     },
     data: {
       isDeleted: true
@@ -69,7 +69,7 @@ export async function destroy(id: string) {
 export async function put(id: string, data: Partial<User>) {
   const user = await prisma.user.update({
     where: {
-      id: id,
+      id,
     },
     data
   })

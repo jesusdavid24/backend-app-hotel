@@ -1,12 +1,8 @@
-import { Request, Response } from 'express';
+import { type Request, type Response } from 'express';
+import { type PotencialUser } from './potencialUser.type';
 import errorHandler from '../../utils/errorHandler';
 
-import {
-  getAllUser,
-  destroy,
-  createUser,
-  put
-} from './potencialUser.service';
+import { getAllUser, destroy, createUser, put } from './potencialUser.service';
 
 export async function getUsers(req: Request, res: Response) {
   try {
@@ -21,7 +17,7 @@ export async function getUsers(req: Request, res: Response) {
 
 export async function createPotencialUser(req: Request, res: Response) {
   try {
-    const data = req.body;
+    const data: PotencialUser = req.body;
 
     const user = await createUser(data);
 
@@ -38,7 +34,6 @@ export async function deletePotencialUser(req: Request, res: Response) {
     await destroy(id);
 
     return res.end();
-
   } catch (exception: unknown) {
     const message = errorHandler(exception);
     return res.status(400).send({ message });
@@ -48,12 +43,11 @@ export async function deletePotencialUser(req: Request, res: Response) {
 export async function updatePotencialUser(req: Request, res: Response) {
   try {
     const { id } = req.params;
-    const data = req.body;
+    const data: PotencialUser = req.body;
 
     const user = await put(id, data);
 
     return res.json(user);
-
   } catch (exception: unknown) {
     const message = errorHandler(exception);
     return res.status(400).send({ message });

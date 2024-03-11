@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { RoomType } from './roomType.type';
+import { type RoomType } from './roomType.type';
 
 const prisma = new PrismaClient();
 
@@ -19,7 +19,7 @@ export async function create(data: RoomType) {
 export async function destroy(id: string) {
   const roomType = await prisma.roomType.update({
     where: {
-      id: id,
+      id,
     },
     data: {
       isDeleted: true
@@ -32,7 +32,7 @@ export async function destroy(id: string) {
 export async function put(id: string, data: Partial<RoomType>) {
   const roomType = await prisma.roomType.update({
     where: {
-      id: id
+      id
     },
     data,
   });

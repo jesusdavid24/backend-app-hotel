@@ -1,25 +1,25 @@
 import { PrismaClient } from '@prisma/client';
-import { Amenity } from './amenity.types';
+import type { Amenity } from './amenity.types';
 
 const prisma = new PrismaClient();
 
 export async function getAmenity() {
-  const amenity = prisma.amenity.findMany();
+  const amenity = await prisma.amenity.findMany();
   return amenity;
 }
 
 export async function create(data: Amenity) {
-  const amenity = prisma.amenity.create({
-    data,
+  const amenity = await prisma.amenity.create({
+    data
   });
 
   return amenity;
 }
 
 export async function destroy(id: string) {
-  const amenity = prisma.amenity.update({
+  const amenity = await prisma.amenity.update({
     where: {
-      id: id
+      id
     },
     data: {
       isDeleted: true
@@ -30,11 +30,11 @@ export async function destroy(id: string) {
 }
 
 export async function put(id: string, data: Amenity) {
-  const amenity = prisma.amenity.update({
+  const amenity = await prisma.amenity.update({
     where: {
-      id: id
+      id
     },
-    data,
+    data
   });
 
   return amenity;

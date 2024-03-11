@@ -1,15 +1,15 @@
 import nodemailer from 'nodemailer';
-import Mail from 'nodemailer/lib/mailer';
+import type Mail from 'nodemailer/lib/mailer';
 
 function createGmailTransporter() {
   const hostmame = process.env.SMTP_SERVER;
-  const port = Number(process.env.SMTP_PORT) as number;
+  const port = Number(process.env.SMTP_PORT);
   const username = process.env.SMTP_USER;
   const password = process.env.SMTP_PASSWORD;
 
   const transporter = nodemailer.createTransport({
     host: hostmame,
-    port: port,
+    port,
     secure: true,
     auth: {
       user: username,

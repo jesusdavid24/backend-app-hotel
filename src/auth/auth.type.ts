@@ -1,5 +1,5 @@
 
-export type PayloadType = {
+export interface PayloadType {
   id: string;
   name: string;
   roleId: string;
