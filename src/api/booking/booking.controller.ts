@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import errorHandler from '../../utils/errorHandler/errorHandler';
+import errorHandler from '../../utils/errorHandler';
 import { getUserByEmail } from '../users/user.service';
 import { createUser } from '../potencialUser/potencialUser.service';
 import { PotencialUser } from '../potencialUser/potencialUser.type';

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { Storage } from '@google-cloud/storage';
 import path from 'path';
-import errorHandler from '../../utils/errorHandler/errorHandler';
+import errorHandler from '../../utils/errorHandler';
 import { put } from './uploadImages.service';
 
 const storage = new Storage({

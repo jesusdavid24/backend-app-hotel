@@ -1,6 +1,6 @@
 import { Strategy } from 'passport-local';
-import { getUserByEmail } from '../../../api/users/user.service';
-import { comparePassword } from '../../utils/bcrypt';
+import { getUserByEmail } from '../api/users/user.service';
+import { comparePassword } from '../utils/bcrypt';
 
 const LocalStrategy = new Strategy({
   usernameField: 'email'

@@ -4,7 +4,7 @@ import routes from './routes';
 import {
   passportLocal,
   passportJwt
-} from './auth';
+} from './config/passport';
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();

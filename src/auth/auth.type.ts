@@ -1,6 +1,6 @@
 import { Request } from 'express';
 
-import { User } from '../../api/users/user.types';
+import { User } from '../api/users/user.types';
 
 export type PayloadType = {
   id: string;
