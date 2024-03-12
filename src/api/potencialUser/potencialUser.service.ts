@@ -8,9 +8,39 @@ export async function getAllUser() {
   return user;
 }
 
+export async function getById(id: string) {
+  const user = await prisma.potencialUser.findUnique({
+    where: {
+      id,
+    }
+  });
+
+
+  return user!;
+}
+
+export async function getUserByEmail(email: string) {
+  const user = await prisma.potencialUser.findUnique({
+    where: {
+      email,
+    }
+  });
+
+  return user;
+}
+
+
 export async function createUser(data: PotencialUser) {
-  const user = await prisma.potencialUser.create({
-    data,
+  const user = await prisma.potencialUser.upsert({
+    where: {
+      email: data.email
+    },
+    create: {
+      ...data,
+    },
+    update: {
+      ...data
+    }
   });
 
   return user;

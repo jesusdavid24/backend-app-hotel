@@ -1,7 +1,6 @@
 import type {  Request, Response } from 'express';
 import { type PotencialUser } from '@api/potencialUser/potencialUser.type';
 import { type Booking } from './booking.types';
-import { getUserByEmail } from '@api/users/user.service';
 import { createUser } from '@api/potencialUser/potencialUser.service';
 import { getRoomById } from '@api/rooms/rooms.service';
 import errorHandler from '@utils/errorHandler';
@@ -57,8 +56,7 @@ export async function getBookingById(req: Request, res: Response) {
 
 export async function createBookingWithoutLogin(req: Request, res: Response) {
   try {
-    let user = null;
-
+  
     const {
       identificationNumber,
       firstName,
@@ -76,11 +74,7 @@ export async function createBookingWithoutLogin(req: Request, res: Response) {
       email
     };
 
-    user = await getUserByEmail(email as string);
-
-    if (!user) {
-      user = await createUser(newUser as PotencialUser);
-    }
+    const user = await createUser(newUser as PotencialUser);  
 
     const room = await getRoomById(roomId as string);
 
