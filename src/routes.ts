@@ -1,16 +1,15 @@
 import { type Application } from 'express';
-import userRouter from './api/users';
-import bookingRouter from './api/booking';
-import roomRouter from './api/rooms';
-import amenityRouter from './api/amenity';
-import ruleRouter from './api/rule';
-import imagesRouter from './api/images';
+import userRouter from '@api/users';
+import bookingRouter from '@api/booking';
+import roomRouter from '@api/rooms';
+import amenityRouter from '@api/amenity';
+import ruleRouter from '@api/rule';
+import imagesRouter from '@api/images';
 import authRouter from './auth';
-import roleRouter from './api/role';
-import roomTypeRouter from './api/roomType';
-import potencialUserRouter from './api/potencialUser';
-import healthCheckRouter from './api/healtCheck';
-
+import roleRouter from '@api/role';
+import roomTypeRouter from '@api/roomType';
+import potencialUserRouter from '@api/potencialUser';
+import healthCheckRouter from '@api/healtCheck';
 
 const routes = (app: Application) => {
   app.use('/api/user', userRouter);
@@ -24,6 +23,6 @@ const routes = (app: Application) => {
   app.use('/api/potencial-user', potencialUserRouter);
   app.use('/api/healthCheck', healthCheckRouter);
   app.use('/auth', authRouter);
-}
+};
 
 export default routes;

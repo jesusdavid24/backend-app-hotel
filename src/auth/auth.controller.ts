@@ -1,13 +1,13 @@
 import { type Request, type Response } from 'express';
 
-import errorHandler from '../utils/errorHandler';
+import errorHandler from '@utils/errorHandler';
 import { signToken , changePassword } from './auth.service';
-import { type User } from '../api/users/user.types';
+import { type User } from '@api/users/user.types';
 import { sendNodeMailer } from '../config/nodemailer';
-import { welcomeEmail } from '../utils/sendEmail';
+import { welcomeEmail } from '@utils/sendEmail';
 
-import { getUserByEmail } from '../api/users/user.service'
-import { getRoleById } from '../api/role/role.service';
+import { getUserByEmail } from '@api/users/user.service'
+import { getRoleById } from '@api/role/role.service';
 
 export async function login(req: Request, res: Response) {
 

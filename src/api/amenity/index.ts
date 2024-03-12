@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import passport from 'passport';
-import { checkRole } from '../../middleware/verifyRole';
+import { checkRole } from '@middleware/verifyRole';
 
 import {
   createAmenity,
@@ -11,13 +11,14 @@ import {
 
 const router = Router();
 
-router.all('*', [
-  passport.authenticate('jwt', { session: false }),
-  checkRole('ADMIN', 'CLIENT'),
-])
+router
+  .all('*', [
+    passport.authenticate('jwt', { session: false }),
+    checkRole('ADMIN', 'CLIENT')
+  ])
   .get('/', getAmenities)
   .post('/', createAmenity)
   .delete('/:id', deleteAmenity)
-  .put('/:id', updateAmenity)
+  .put('/:id', updateAmenity);
 
 export default router;

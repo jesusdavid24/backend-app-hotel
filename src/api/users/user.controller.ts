@@ -1,5 +1,6 @@
 import { type Request, type Response } from 'express';
-import errorHandler from '../../utils/errorHandler';
+import errorHandler from '@utils/errorHandler';
+
 import {
   getAllUser,
   getById,

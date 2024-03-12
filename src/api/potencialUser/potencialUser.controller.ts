@@ -1,6 +1,6 @@
 import { type Request, type Response } from 'express';
 import { type PotencialUser } from './potencialUser.type';
-import errorHandler from '../../utils/errorHandler';
+import errorHandler from '@utils/errorHandler';
 
 import { getAllUser, destroy, createUser, put } from './potencialUser.service';
 

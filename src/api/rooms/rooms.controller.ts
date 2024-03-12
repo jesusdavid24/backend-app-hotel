@@ -1,13 +1,7 @@
 import { type Request, type Response } from 'express';
-import errorHandler from '../../utils/errorHandler';
+import errorHandler from '@utils/errorHandler';
 
-import {
-  getAllRoom,
-  getRoomById,
-  create,
-  destroy,
-  put
-} from './rooms.service';
+import { getAllRoom, getRoomById, create, destroy, put } from './rooms.service';
 
 export async function getRoom(req: Request, res: Response) {
   try {
@@ -36,7 +30,7 @@ export async function createRoom(req: Request, res: Response) {
   try {
     const data = req.body;
 
-    const room = await create(data)
+    const room = await create(data);
 
     return res.status(201).json(room);
   } catch (exception: unknown) {
@@ -51,7 +45,6 @@ export async function deleteRoom(req: Request, res: Response) {
     await destroy(id);
 
     return res.end();
-
   } catch (exception: unknown) {
     const message = errorHandler(exception);
     return res.status(400).send({ message });
@@ -71,4 +64,3 @@ export async function updateRoom(req: Request, res: Response) {
     return res.status(400).send({ message });
   }
 }
-

@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { type PayloadType } from './auth.type';
-import { hashPassword } from '../utils/bcrypt';
-import { getById, put } from '../api/users/user.service';
+import { hashPassword } from '@utils/bcrypt';
+import { getById, put } from '@api/users/user.service';
 
 
 const SECRET = process.env.JWT_SECRET!

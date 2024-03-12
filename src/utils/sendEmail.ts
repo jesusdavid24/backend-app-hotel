@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
-import { put } from '../api/users/user.service'
-import { type User } from '../api/users/user.types';
+import { put } from '@api/users/user.service'
+import { type User } from '@api/users/user.types';
 
 const SECRET = process.env.JWT_SECRET!
 

@@ -1,10 +1,10 @@
-import type { Request, Response } from 'express';
-import type { PotencialUser } from '../potencialUser/potencialUser.type';
-import type { Booking } from './booking.types';
-import { getUserByEmail } from '../users/user.service';
-import { createUser } from '../potencialUser/potencialUser.service';
-import { getRoomById } from '../rooms/rooms.service';
-import errorHandler from '../../utils/errorHandler';
+import type {  Request, Response } from 'express';
+import { type PotencialUser } from '@api/potencialUser/potencialUser.type';
+import { type Booking } from './booking.types';
+import { getUserByEmail } from '@api/users/user.service';
+import { createUser } from '@api/potencialUser/potencialUser.service';
+import { getRoomById } from '@api/rooms/rooms.service';
+import errorHandler from '@utils/errorHandler';
 
 import {
   getAllBooking,

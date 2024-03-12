@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { checkRole } from '../../middleware/verifyRole';
+import { checkRole } from '@middleware/verifyRole';
 
 import {
   getUsers,
@@ -13,6 +13,6 @@ const router = Router();
 router.get('/', checkRole('ADMIN'), getUsers);
 router.post('/', createPotencialUser);
 router.delete('/id', checkRole('ADMIN'), deletePotencialUser);
-router.put('/id', checkRole('ADMIN'), updatePotencialUser)
+router.put('/id', checkRole('ADMIN'), updatePotencialUser);
 
 export default router;

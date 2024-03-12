@@ -1,5 +1,5 @@
 import { type Request, type Response } from 'express';
-import errorHandler from '../../utils/errorHandler';
+import errorHandler from '@utils/errorHandler';
 import { type Role } from './role.type';
 
 import { getAllRole, getRoleById, create } from './role.service';

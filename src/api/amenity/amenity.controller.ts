@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import errorHandler from '../../utils/errorHandler';
+import errorHandler from '@utils/errorHandler';
 import type { Amenity } from './amenity.types';
 
 import { put, create, destroy, getAmenity } from './amenity.service';

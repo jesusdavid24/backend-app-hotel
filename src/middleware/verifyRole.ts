@@ -4,7 +4,7 @@ import {
   type NextFunction
 } from 'express';
 
-import { type User } from '../api/users/user.types';
+import { type User } from '@api/users/user.types';
 
 export function checkRole(...role: string[]) {
   return (req: Request, res: Response, next: NextFunction) => {

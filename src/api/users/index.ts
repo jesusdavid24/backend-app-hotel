@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import passport from 'passport';
-import { checkRole } from '../../middleware/verifyRole';
+import { checkRole } from '@middleware/verifyRole';
 
 import {
   getUsers,
