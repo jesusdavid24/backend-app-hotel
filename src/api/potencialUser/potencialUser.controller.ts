@@ -1,5 +1,6 @@
 import { type Request, type Response } from 'express';
 import { type PotencialUser } from './potencialUser.type';
+import { getWsClient } from 'src/config/webSocket';
 import errorHandler from '@utils/errorHandler';
 
 import { getAllUser, destroy, createUser, put } from './potencialUser.service';
@@ -20,6 +21,7 @@ export async function createPotencialUser(req: Request, res: Response) {
     const data: PotencialUser = req.body;
 
     const user = await createUser(data);
+    getWsClient().emit('userCreated', user);
 
     return res.status(201).json(user);
   } catch (exception: unknown) {
