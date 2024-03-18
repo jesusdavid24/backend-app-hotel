@@ -1,4 +1,5 @@
 import { type Request, type Response } from 'express';
+import { type User } from './user.types'
 import errorHandler from '@utils/errorHandler';
 
 import {
@@ -50,7 +51,7 @@ export async function getUserById(req: Request, res: Response) {
 
 export async function createUser(req: Request, res: Response) {
   try {
-    const data = req.body;
+    const data: User = req.body;
 
     const user = await create(data);
     return res.status(201).json(user)

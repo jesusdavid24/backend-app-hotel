@@ -8,7 +8,6 @@ import {
   getBookingById,
   getBookingsByUser,
   createBooking,
-  createBookingWithoutLogin,
   deleteBooking,
   updateBooking
 } from './booking.controller';
@@ -35,8 +34,6 @@ router.get(
   checkRole('ADMIN'),
   getBookingsByUser
 );
-
-router.post('/create', createBookingWithoutLogin);
 
 router.post(
   '/',

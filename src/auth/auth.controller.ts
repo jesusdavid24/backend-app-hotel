@@ -5,27 +5,25 @@ import { signToken , changePassword } from './auth.service';
 import { type User } from '@api/users/user.types';
 import { sendNodeMailer } from '../config/nodemailer';
 import { welcomeEmail } from '@utils/sendEmail';
-
 import { getUserByEmail } from '@api/users/user.service'
-import { getRoleById } from '@api/role/role.service';
+
 
 export async function login(req: Request, res: Response) {
 
   try {
     const user = req.user as User;
-    const role = await getRoleById(user.roleId)
 
     const payload = {
       id: user.id,
       name: `${user.firstName} ${user.lastName}`,
-      roleId: role.name,
+      role: user.role
     }
 
     const token = signToken(payload);
 
     const userLogged = {
       name: `${user.firstName} ${user.lastName}`,
-      roleId: role.name,
+      role: user.role,
       recoveryToken: user.recoveryToken,
     }
 

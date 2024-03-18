@@ -1,10 +1,7 @@
-
 export interface PayloadType {
   id: string;
   name: string;
-  roleId: string;
+  role: string;
   iat?: number;
   exp?: number;
 }
-
-

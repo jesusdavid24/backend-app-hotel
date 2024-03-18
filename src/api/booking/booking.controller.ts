@@ -1,9 +1,9 @@
-import type {  Request, Response } from 'express';
-import { type PotencialUser } from '@api/potencialUser/potencialUser.type';
+import type { Request, Response } from 'express';
 import { type Booking } from './booking.types';
-import { createUser } from '@api/potencialUser/potencialUser.service';
 import { getRoomById } from '@api/rooms/rooms.service';
+import { create as createUser } from '@api/users/user.service';
 import errorHandler from '@utils/errorHandler';
+import { type UserWithouPassword } from '@api/users/user.types';
 
 import {
   getAllBooking,
@@ -13,6 +13,7 @@ import {
   destroy,
   put
 } from './booking.service';
+
 
 export async function getBookings(req: Request, res: Response) {
   try {
@@ -44,7 +45,7 @@ export async function getBookingById(req: Request, res: Response) {
     const booking = await getByIdBooking(id);
 
     if (!booking) {
-      return res.end()
+      return res.end();
     }
 
     return res.json(booking);
@@ -54,9 +55,9 @@ export async function getBookingById(req: Request, res: Response) {
   }
 }
 
-export async function createBookingWithoutLogin(req: Request, res: Response) {
+export async function createBooking(req: Request, res: Response) {
   try {
-  
+
     const {
       identificationNumber,
       firstName,
@@ -74,7 +75,7 @@ export async function createBookingWithoutLogin(req: Request, res: Response) {
       email
     };
 
-    const user = await createUser(newUser as PotencialUser);  
+    const user = await createUser(newUser as UserWithouPassword);
 
     const room = await getRoomById(roomId as string);
 
@@ -85,7 +86,7 @@ export async function createBookingWithoutLogin(req: Request, res: Response) {
     const newBooking = {
       checkInDate,
       checkOutDate,
-      potencialUserId: user.id,
+      userWithouPasswordId: user.id,
       roomId: room.id
     };
 
@@ -93,18 +94,6 @@ export async function createBookingWithoutLogin(req: Request, res: Response) {
 
     return res.status(201).json(booking);
 
-  } catch (exception: unknown) {
-    const message = errorHandler(exception);
-    return res.status(400).send({ message });
-  }
-}
-
-export async function createBooking(req: Request, res: Response) {
-  try {
-    const data: Booking = req.body;
-
-    const booking = await create(data);
-    return res.status(201).json(booking)
   } catch (exception: unknown) {
     const message = errorHandler(exception);
     return res.status(400).send({ message });
@@ -130,7 +119,7 @@ export async function updateBooking(req: Request, res: Response) {
 
     const booking = await put(id, data);
 
-    return res.json(booking)
+    return res.json(booking);
   } catch (exception: unknown) {
     const message = errorHandler(exception);
     return res.status(400).send({ message });

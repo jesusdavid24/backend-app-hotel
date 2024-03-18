@@ -5,27 +5,33 @@ import { type User } from './user.types';
 const prisma = new PrismaClient();
 
 export async function getAllUser() {
-  const users = await prisma.user.findMany();
+  const users = await prisma.userWithouPassword.findMany();
   return users;
 }
 
 export async function create(input: User) {
-  const hashedPassword = await hashPassword(input.password)
 
+  let hashedPassword = null;
+
+  if(input.password) {
+    hashedPassword = await hashPassword(input.password)
+  }
+  
   const data = {
     ...input,
     password: hashedPassword
   }
 
-  const user = await prisma.user.upsert({
+  const user = await prisma.userWithouPassword.upsert({
     where: {
       email: data.email
     },
     create: {
       ...data,
+      requiresAuth: true
     },
     update: {
-      ...data
+      ...data,
     }
   });
 
@@ -33,7 +39,7 @@ export async function create(input: User) {
 }
 
 export async function getById(id: string) {
-  const user = await prisma.user.findUnique({
+  const user = await prisma.userWithouPassword.findUnique({
     where: {
       id,
     }
@@ -44,7 +50,7 @@ export async function getById(id: string) {
 }
 
 export async function getUserByEmail(email: string) {
-  const user = await prisma.user.findUnique({
+  const user = await prisma.userWithouPassword.findUnique({
     where: {
       email,
     }
@@ -54,7 +60,7 @@ export async function getUserByEmail(email: string) {
 }
 
 export async function destroy(id: string) {
-  const user = await prisma.user.update({
+  const user = await prisma.userWithouPassword.update({
     where: {
       id,
     },
@@ -67,7 +73,7 @@ export async function destroy(id: string) {
 }
 
 export async function put(id: string, data: Partial<User>) {
-  const user = await prisma.user.update({
+  const user = await prisma.userWithouPassword.update({
     where: {
       id,
     },

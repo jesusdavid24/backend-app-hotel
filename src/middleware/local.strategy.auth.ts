@@ -15,7 +15,11 @@ const LocalStrategy = new Strategy(
         return;
       }
 
-      const isMatch = await comparePassword(password, user.password);
+      let isMatch = null;
+
+      if (user.password) {
+        isMatch = await comparePassword(password, user.password);
+      }
 
       if (!isMatch) {
         done(null, false, { message: 'unauthorized' });

@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import { getById } from '@api/potencialUser/potencialUser.service';
 import type { Booking } from './booking.types';
+import { getById } from '@api/users/user.service';
 
 const prisma = new PrismaClient();
 
@@ -10,18 +10,17 @@ export async function getAllBooking() {
 }
 
 export async function create(data: Booking) {
-  const { status, ...input } = data;
-
-  if (!input.potencialUserId) {
+  if (!data.userWithouPasswordId) {
     throw Error('User not found');
   }
 
-  const user = await getById(input.potencialUserId);
+  const user = await getById(data.userWithouPasswordId);
 
   const booking = await prisma.booking.create({
     data: {
-      ...input,
-      createBy: `${user.firstName} ${user.lastName}`
+      ...data,
+      createBy: `${user.firstName} ${user.lastName}`,
+      status: 'PENDING'
     }
   });
 
@@ -41,7 +40,7 @@ export async function getByIdBooking(id: string) {
 export async function getBookingsByUserId(id: string) {
   const booking = await prisma.booking.findMany({
     where: {
-      userId: id
+      userWithouPasswordId: id
     }
   });
   return booking;

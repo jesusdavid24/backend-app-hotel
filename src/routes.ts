@@ -6,9 +6,8 @@ import amenityRouter from '@api/amenity';
 import ruleRouter from '@api/rule';
 import imagesRouter from '@api/images';
 import authRouter from './auth';
-import roleRouter from '@api/role';
 import roomTypeRouter from '@api/roomType';
-import potencialUserRouter from '@api/potencialUser';
+import identifactionTypeRouter from '@api/identificationType';
 import healthCheckRouter from '@api/healtCheck';
 
 const routes = (app: Application) => {
@@ -18,10 +17,9 @@ const routes = (app: Application) => {
   app.use('/api/rule', ruleRouter);
   app.use('/api/amenity', amenityRouter);
   app.use('/api/upload-images', imagesRouter);
-  app.use('/api/role', roleRouter);
   app.use('/api/room-type', roomTypeRouter);
-  app.use('/api/potencial-user', potencialUserRouter);
   app.use('/api/healthCheck', healthCheckRouter);
+  app.use('/api/identification-type', identifactionTypeRouter);
   app.use('/auth', authRouter);
 };
 
