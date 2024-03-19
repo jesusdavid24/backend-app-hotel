@@ -14,7 +14,7 @@ const router = Router();
 router
   .all('*', [
     passport.authenticate('jwt', { session: false }),
-    checkRole('ADMIN', 'CLIENT')
+    checkRole('ADMIN')
   ])
   .get('/', getAmenities)
   .post('/', createAmenity)

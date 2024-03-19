@@ -8,6 +8,16 @@ export async function getAllIdentificationType() {
   return identificationType;
 }
 
+export async function getById(id: string) {
+  const identificationType = await prisma.identificationType.findUnique({
+    where: {
+      id
+    }
+  });
+
+  return identificationType!;
+}
+
 export async function create(data: IdentificationType) {
   const identificationType = await prisma.identificationType.create({
     data

@@ -31,14 +31,14 @@ router.post('/', createUser);
 router.delete(
   '/:id',
   passport.authenticate('jwt', { session: false }),
-  checkRole('ADMIN', 'CLIENT'),
+  checkRole('ADMIN', 'CUSTOMER'),
   deleteUser
 );
 
 router.put(
   '/:id',
   passport.authenticate('jwt', { session: false }),
-  checkRole('ADMIN', 'CLIENT'),
+  checkRole('ADMIN', 'CUSTOMER'),
   updateUser
 );
 

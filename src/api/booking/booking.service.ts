@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import type { Booking } from './booking.types';
-import { getById } from '@api/users/user.service';
+import { getById, getUserByEmail } from '@api/users/user.service';
 
 const prisma = new PrismaClient();
 
@@ -31,6 +31,23 @@ export async function getByIdBooking(id: string) {
   const booking = await prisma.booking.findUnique({
     where: {
       id
+    }
+  });
+
+  return booking;
+}
+
+export async function getEmailBooking(email: string) {
+  const user = await getUserByEmail(email);
+  console.log('user', user);
+
+  if (!user) {
+    throw new Error('Email not exist');
+  }
+
+  const booking = await prisma.booking.findFirst({
+    where: {
+      userWithouPasswordId: user.id
     }
   });
 

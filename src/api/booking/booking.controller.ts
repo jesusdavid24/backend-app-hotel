@@ -1,14 +1,16 @@
 import type { Request, Response } from 'express';
 import { type Booking } from './booking.types';
-import { getRoomById } from '@api/rooms/rooms.service';
-import { create as createUser } from '@api/users/user.service';
-import errorHandler from '@utils/errorHandler';
 import { type UserWithouPassword } from '@api/users/user.types';
+import { getRoomById } from '@api/rooms/rooms.service';
+import { create as createUser, getUserByEmail } from '@api/users/user.service';
+import errorHandler from '@utils/errorHandler';
+
 
 import {
   getAllBooking,
   getByIdBooking,
   getBookingsByUserId,
+  getEmailBooking,
   create,
   destroy,
   put
@@ -55,6 +57,22 @@ export async function getBookingById(req: Request, res: Response) {
   }
 }
 
+export async function getBookignByEmail(req: Request, res: Response) {
+  try {
+    const {email} = req.body;
+    console.log(email);
+    
+
+    const booking = await getEmailBooking(email);
+
+    return res.json(booking)
+
+  } catch (exception: unknown) {
+    const message = errorHandler(exception);
+    return res.status(400).send({ message });
+  }
+}
+
 export async function createBooking(req: Request, res: Response) {
   try {
 
@@ -63,19 +81,28 @@ export async function createBooking(req: Request, res: Response) {
       firstName,
       lastName,
       email,
+      phone,
       roomId,
+      identificationTypeId,
       checkInDate,
       checkOutDate
     } = req.body;
 
-    const newUser = {
-      identificationNumber,
-      firstName,
-      lastName,
-      email
-    };
+    let newUser = null;
+    let user = await getUserByEmail(email); 
 
-    const user = await createUser(newUser as UserWithouPassword);
+    if (!user) {
+      newUser = {
+        identificationNumber,
+        identificationTypeId,
+        firstName,
+        lastName,
+        email,
+        phone
+      };
+      
+      user = await createUser(newUser as UserWithouPassword);
+    }
 
     const room = await getRoomById(roomId as string);
 
@@ -87,12 +114,12 @@ export async function createBooking(req: Request, res: Response) {
       checkInDate,
       checkOutDate,
       userWithouPasswordId: user.id,
-      roomId: room.id
+      roomId: room.id,
     };
 
     const booking = await create(newBooking as Booking);
 
-    return res.status(201).json(booking);
+    return res.status(201).json({booking});
 
   } catch (exception: unknown) {
     const message = errorHandler(exception);
@@ -125,3 +152,5 @@ export async function updateBooking(req: Request, res: Response) {
     return res.status(400).send({ message });
   }
 }
+
+

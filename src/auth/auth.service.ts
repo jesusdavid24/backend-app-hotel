@@ -18,6 +18,7 @@ export function signToken(payload: PayloadType) {
   return token;
 }
 
+
 export async function changePassword(token: string, newPassword: string) {
 
   const payload = verifyToken(token);

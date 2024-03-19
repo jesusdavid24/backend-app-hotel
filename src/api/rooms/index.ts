@@ -12,34 +12,16 @@ import {
 
 const router = Router();
 
-router.get(
-  '/',
-  passport.authenticate('jwt', { session: false }),
-  checkRole('ADMIN'),
-  getRoom
-);
-
-router.get('/:id', getById);
-
-router.post(
-  '/',
-  passport.authenticate('jwt', { session: false }),
-  checkRole('ADMIN'),
-  createRoom
-);
-
-router.delete(
-  '/:id',
-  passport.authenticate('jwt', { session: false }),
-  checkRole('ADMIN'),
-  deleteRoom
-);
-
-router.put(
-  '/:id',
-  passport.authenticate('jwt', { session: false }),
-  checkRole('ADMIN'),
-  updateRoom
-);
+router
+  .all(
+    '*',
+    passport.authenticate('jwt', { session: false }),
+    checkRole('ADMIN')
+  )
+  .get('/', getRoom)
+  .get('/:id', getById)
+  .post('/', createRoom)
+  .delete('/:id', deleteRoom)
+  .put('/:id', updateRoom);
 
 export default router;

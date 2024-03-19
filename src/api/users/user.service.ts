@@ -9,12 +9,17 @@ export async function getAllUser() {
   return users;
 }
 
-export async function create(input: User) {
+export async function create(input: User ) {
 
   let hashedPassword = null;
 
+  if (!input.password) {
+    input.role = "CUSTOMER"
+  }
+
   if(input.password) {
     hashedPassword = await hashPassword(input.password)
+    input.requiresAuth = true
   }
   
   const data = {
@@ -28,7 +33,6 @@ export async function create(input: User) {
     },
     create: {
       ...data,
-      requiresAuth: true
     },
     update: {
       ...data,
@@ -52,7 +56,7 @@ export async function getById(id: string) {
 export async function getUserByEmail(email: string) {
   const user = await prisma.userWithouPassword.findUnique({
     where: {
-      email,
+      email
     }
   });
 

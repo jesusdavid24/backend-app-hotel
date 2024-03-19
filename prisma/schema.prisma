@@ -14,22 +14,23 @@ datasource db {
 }
 
 model UserWithouPassword {
-  id                   String               @id @default(auto()) @map("_id") @db.ObjectId
+  id                   String             @id @default(auto()) @map("_id") @db.ObjectId
   identificationNumber String
   firstName            String
   lastName             String
-  email                String               @unique
+  email                String             @unique
   password             String?
   phone                String
-  isActive             Boolean              @default(false)
-  isDeleted            Boolean              @default(false)
-  requiresAuth         Boolean              @default(false)
+  isActive             Boolean            @default(false)
+  isDeleted            Boolean            @default(false)
+  requiresAuth         Boolean            @default(false)
   recoveryToken        String?
   booking              Booking[]
   role                 UserRole
-  identificationType   IdentificationType[]
-  createdAt            DateTime             @default(now())
-  updatedAt            DateTime             @updatedAt
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+  IdentificationType   IdentificationType @relation(fields: [identificationTypeId], references: [id])
+  identificationTypeId String             @db.ObjectId
 }
 
 enum UserRole {
@@ -40,12 +41,11 @@ enum UserRole {
 }
 
 model IdentificationType {
-  id                   String             @id @default(auto()) @map("_id") @db.ObjectId
-  name                 String
-  value                String
-  isDeleted            Boolean            @default(false)
-  UserWithouPassword   UserWithouPassword @relation(fields: [userWithouPasswordId], references: [id])
-  userWithouPasswordId String             @db.ObjectId
+  id        String               @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  value     String
+  isDeleted Boolean              @default(false)
+  user      UserWithouPassword[]
 }
 
 model Booking {
@@ -88,10 +88,12 @@ model Room {
 }
 
 model RoomType {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  isDeleted Boolean @default(false)
-  room      Room[]
+  id                 String  @id @default(auto()) @map("_id") @db.ObjectId
+  name               String
+  nonDiscountedValue Float
+  discountedValue    Float
+  isDeleted          Boolean @default(false)
+  room               Room[]
 }
 
 model Amenity {
