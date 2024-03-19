@@ -52,6 +52,7 @@ model Booking {
   id                   String             @id @default(auto()) @map("_id") @db.ObjectId
   checkInDate          DateTime
   checkOutDate         DateTime
+  codeBooking          String?
   source               String?
   createBy             String?
   Room                 Room               @relation(fields: [roomId], references: [id])

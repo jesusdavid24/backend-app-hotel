@@ -85,7 +85,7 @@ export async function createBooking(req: Request, res: Response) {
       roomId,
       identificationTypeId,
       checkInDate,
-      checkOutDate
+      checkOutDate,
     } = req.body;
 
     let newUser = null;

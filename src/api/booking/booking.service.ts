@@ -1,6 +1,9 @@
 import { PrismaClient } from '@prisma/client';
 import type { Booking } from './booking.types';
+import { generateAlphanumericCode } from '@utils/generateCode.booking';
 import { getById, getUserByEmail } from '@api/users/user.service';
+import { emailStatusBooking } from '@utils/sendEmail';
+import { sendNodeMailer } from '../../config/nodemailer';
 
 const prisma = new PrismaClient();
 
@@ -39,7 +42,6 @@ export async function getByIdBooking(id: string) {
 
 export async function getEmailBooking(email: string) {
   const user = await getUserByEmail(email);
-  console.log('user', user);
 
   if (!user) {
     throw new Error('Email not exist');
@@ -77,11 +79,26 @@ export async function destroy(id: string) {
 }
 
 export async function put(id: string, data: Booking) {
+  const bookingId = await getBookingsByUserId(data.userWithouPasswordId);
+  const userId = bookingId[0].userWithouPasswordId;
+
+  const user = await getById(userId);
+
+  let newCodeBooking = null;
+
+  if (data.status) {
+    newCodeBooking = generateAlphanumericCode();
+    await sendNodeMailer(await emailStatusBooking(user, newCodeBooking));
+  }
+
   const booking = await prisma.booking.update({
     where: {
       id
     },
-    data
+    data: {
+      codeBooking: newCodeBooking,
+      status: data.status
+    }
   });
 
   return booking;
